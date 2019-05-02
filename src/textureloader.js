@@ -90,6 +90,10 @@ function addTexture(texture) {
     bufferPlaneMesh.rotation.x -= Math.PI / 2
     bufferPlaneMesh.receiveShadow = true;
     scene.add(bufferPlaneMesh);
+    var toggleBtn = document.querySelector('#toggleTerrain');
+    if (toggleBtn) {
+        toggleBtn.disabled = false;
+    }
     var statusBar = document.querySelector("#reset");
     if (statusBar) {
         statusBar.innerHTML = "receive data completed.";
@@ -98,7 +102,9 @@ function addTexture(texture) {
 }
 
 function toggleTerrain() {
-    bufferPlaneMesh.visible = !bufferPlaneMesh.visible;
+    if (bufferPlaneMesh) {
+        bufferPlaneMesh.visible = !bufferPlaneMesh.visible;
+    }
 }
 
 function customObj3d() {
