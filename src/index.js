@@ -8,7 +8,6 @@ var map = window.map = new mapboxgl.Map({
     hash: true
 });
 map.addControl(new mapboxgl.NavigationControl);
-map.addControl(new mapboxgl.FullscreenControl);
 
 // parameters to ensure the THREE plane is georeferenced correctly on the map
 var modelOrigin = [19.638807, 0.762392];
@@ -80,3 +79,20 @@ map.on('style.load', function () {
     console.warn('style loaded, adding THREE layer..');
     map.addLayer(customLayer, 'roads labels');
 });
+
+var title = document.getElementById('location-title');
+var description = document.getElementById('location-description');
+var preBtn = document.querySelector('#preChapBtn');
+var nextBtn = document.querySelector('#nextChapBtn');
+var controller = {
+    index: 0,
+    timer: 0
+}
+
+// Events Time Line. refer to https://asoiaf.fandom.com/zh/wiki/Portal:%E5%8E%86%E5%8F%B2
+setTimeout(function(){
+    playback(controller);
+}, 10000);
+
+preBtn.addEventListener('click', function() { if (controller.index - 1 >= 0) playback(controller, -1) });
+nextBtn.addEventListener('click', function() { playback(controller, 1) });
