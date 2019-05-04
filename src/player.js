@@ -1,4 +1,6 @@
+var animationInterval = 8000;
 function playback(controller, next) {
+    if (!controller.playingStory) return;
     if (next == 1) {
         controller.index = (controller.index + 1 === timelines.length) ? 0 : controller.index + 1;
     } else if (next == -1) {
@@ -20,15 +22,22 @@ function playback(controller, next) {
         speed: 0.5, // make the flying slow
         curve: 1
     }
-    map.flyTo(Object.assign(animationOpt, timelines[controller.index].camera));
+    var cameraOpt = timelines[controller.index].camera;
+    var eventPoint = { lon: cameraOpt.center[0], lat: cameraOpt.center[1], radius: 8, color: '#f00' };
+    map.flyTo(Object.assign(animationOpt, cameraOpt));
+    Mapbox.myTween.paused = true;
+    canvasLayer.clear();
 
     map.once('moveend', function () {
+        // render event Point animation
+        Mapbox.myTween.get([eventPoint]).to([Object.assign({}, eventPoint, { radius: 16 })], 2000, canvasLayer.redraw);
+        Mapbox.myTween.paused = false;
         var control = controller;
         // Duration the slide is on screen after interaction
         controller.timer = setTimeout(function () {
             // Increment index, closure?
             control.index = (control.index + 1 === timelines.length) ? 0 : control.index + 1;
             playback(control);
-        }, 7000); // After callback, show the location for 3 seconds.
+        }, animationInterval); // After callback, show the location for 3 seconds.
     });
 }

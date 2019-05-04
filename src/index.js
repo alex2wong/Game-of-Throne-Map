@@ -80,11 +80,20 @@ map.on('style.load', function () {
     map.addLayer(customLayer, 'roads labels');
 });
 
+var canvasLayer = new Mapbox.CanvasOverlayer({
+    map: map,
+    shadow: true,
+    blurWidth: 4
+});
+Mapbox.myTween.loop = true;
+
 var title = document.getElementById('location-title');
 var description = document.getElementById('location-description');
 var preBtn = document.querySelector('#preChapBtn');
 var nextBtn = document.querySelector('#nextChapBtn');
+var pauseBtn = document.querySelector('#pauseBtn');
 var controller = {
+    playingStory: true,
     index: 0,
     timer: 0
 }
@@ -96,3 +105,11 @@ setTimeout(function(){
 
 preBtn.addEventListener('click', function() { if (controller.index - 1 >= 0) playback(controller, -1) });
 nextBtn.addEventListener('click', function() { playback(controller, 1) });
+pauseBtn.addEventListener('click', function() { 
+    controller.playingStory = !controller.playingStory;
+    if (controller.playingStory) {
+        playback(controller, 1);
+        pauseBtn.innerHTML = 'Pause';
+    }
+    if (!controller.playingStory) pauseBtn.innerHTML = 'Play';
+})
