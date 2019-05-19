@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>custom WebGL layer-Threejs</title>
+    <title>Game of Throne Interactive Map</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
     <script src="./assets/pace.min.js"></script>
@@ -13,8 +13,12 @@
             background-color: #333;
             height: 100%;
         }
-        .app-title {
+        #app-title {
+            font-family: "Spectral";
+            font-weight: 900;
+            font-size: 15px;
             text-align: center;
+            color: #999;
         }
         .map-cont {
             flex: 1;
@@ -84,6 +88,16 @@
             cursor: pointer;
             color: #666;
         }
+        .audio-cont {
+            /* width: 200px; */
+            height: 18px;
+        }
+        #muteBtn {
+            cursor: pointer;
+        }
+        .icon-muted {
+            fill: rgb(63, 81, 181);
+        }
     </style>
 </head>
 <body>
@@ -95,19 +109,28 @@
         <input type="checkbox" name="toggleTerrain" id="toggleTerrain" 
             onchange="toggleTerrain()" checked disabled>
         <label for="toggleTerrain">toggle terrain</label>
+        <iframe src="assets/silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+        <audio id="player" autoplay loop>
+            <source src="assets/Ramin Djawadi - Game Of Thrones.mp3" type="audio/mp3">
+        </audio>
     </div>
     <div class='map-overlay-container'>
         <div class='map-overlay'>
-            <h2 id='location-title'>Game of Throne Interactive Map</h2>
+            <div>
+                <span id='app-title'>Game of Throne Interactive Map</span>
+                <svg id="muteBtn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" t="1558261737436" class="icon" style="fill:rgb(199, 199, 199)" viewBox="0 0 1024 1024" version="1.1" p-id="2339" width="16" height="16"><defs><style type="text/css"/></defs><path d="M846.208 512 979.744 378.464C994.144 364.064 995.488 342.016 982.752 329.248 969.984 316.512 947.936 317.856 933.536 332.256L800 465.792 666.464 332.256C652.064 317.856 630.016 316.512 617.248 329.248 604.512 342.016 605.856 364.064 620.256 378.464L753.792 512 620.256 645.536C605.856 659.936 604.512 681.984 617.248 694.752 630.016 707.488 652.064 706.144 666.464 691.744L800 558.208 933.536 691.744C947.936 706.144 969.984 707.488 982.752 694.752 995.488 681.984 994.144 659.936 979.744 645.536L846.208 512 846.208 512ZM480 128 256 277.344 256 746.656 480 896C515.328 896 544 867.328 544 832L544 192C544 156.672 515.328 128 480 128L480 128ZM32 384 32 640C32 675.328 60.672 704 96 704L192 704 192 320 96 320C60.672 320 32 348.672 32 384L32 384Z" p-id="2340"/></svg>
+            </div>
             <p id='location-description'>loading data...</p>
             <div class="btn-container">
                 <span class="btn" id="preChapBtn"> < Pre </span>
                 <span class="btn" id="pauseBtn">Pause</span>
                 <span class="btn" id="nextChapBtn"> Next > </span>
             </div>
+            
             <small>Text credit: <a target='_blank' href='https://asoiaf.fandom.com/zh/wiki/Portal:%E5%8E%86%E5%8F%B2'>https://asoiaf.fandom.com/zh/wiki</a></small>
         </div>
     </div>
+    
 </div>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
 <script src="./src/bundle.js"></script>

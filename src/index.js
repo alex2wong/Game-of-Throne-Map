@@ -87,8 +87,8 @@ var canvasLayer = new Mapbox.CanvasOverlayer({
 });
 Mapbox.myTween.loop = true;
 
-var title = document.getElementById('location-title');
-var description = document.getElementById('location-description');
+var title = document.querySelector('#app-title');
+var description = document.querySelector('#location-description');
 var preBtn = document.querySelector('#preChapBtn');
 var nextBtn = document.querySelector('#nextChapBtn');
 var pauseBtn = document.querySelector('#pauseBtn');

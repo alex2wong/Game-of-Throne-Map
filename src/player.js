@@ -41,3 +41,13 @@ function playback(controller, next) {
         }, animationInterval); // After callback, show the location for 3 seconds.
     });
 }
+
+var muteBtn = document.querySelector('#muteBtn');
+var ncmPlayer = document.querySelector('#player');
+muteBtn.addEventListener('click', function() {
+    if (ncmPlayer) {
+        ncmPlayer.muted = !ncmPlayer.muted;
+        // toggle fill style to indicate current mute state.
+        muteBtn.style.fill = muteBtn.style.fill === 'rgb(63, 81, 181)' ? 'rgb(199, 199, 199)' : 'rgb(63, 81, 181)';
+    }
+});
