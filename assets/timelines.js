@@ -119,4 +119,34 @@ var timelines = [{
         bearing: 45,
         pitch: 0
     }
+}, {
+    "id": "13",
+    "title": "Last Day of Stannis",
+    "description": "史坦尼斯·拜拉席恩卷土重来，向临冬城发动进攻，意欲唤醒北境为他作战。他还得到了铁金库的资助",
+    "camera": {
+        center: [14.560155794776101, 26.61113907],
+        zoom: 6.68,
+        bearing: 45,
+        pitch: 0
+    }
+}, {
+    "id": "14",
+    "title": "Dead Man",
+    "description": "守夜人与托蒙德为首的野人缔结同盟，共同对抗异鬼。在接到一封可能由拉姆斯·波顿发出的信件后，琼恩·雪诺被部下刺杀",
+    "camera": {
+        center: [18.853961295738596, 34.89038102283956],
+        zoom: 6.68,
+        bearing: 45,
+        pitch: 0
+    }
+}, {
+    "id": "15",
+    "title": "Yunkai",
+    "description": "渊凯组织反对丹妮莉丝·坦格利安的联盟，魁尔斯、瓦兰提斯、新吉斯等城邦均向丹妮莉丝宣战 ",
+    "camera": {
+        center: [65.830071566353365, -11.860544433000],
+        zoom: 6.68,
+        bearing: 45,
+        pitch: 0
+    }
 }];
